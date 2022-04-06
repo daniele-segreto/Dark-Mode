@@ -2,14 +2,29 @@ import { useState, useEffect } from "react";
 import data from "./data";
 import Articolo from "./Articolo"; // Componente
 
-// Funzione che se presente 'Theme' nel localStorage
-// returna il suo valore o di default return 'light-mode'
-
 function App() {
+
+  //Stato iniziale per la nostra modalità
+  const [theme, setTheme] = useState('light-mode');
+
+  // Cambia il valore dello StaateTtheme
+  const cambiaTema = () => {
+    if (theme === "light-mode") {
+      setTheme("dark-mode");
+    } else {
+      setTheme("light-mode");
+    }
+  };
+
+  useEffect(() => {
+    // Al mutare del theme state, attacca classe al html tag
+    document.documentElement.className = theme;
+    },[theme]);
+
   return (
     <section className="section-center">
       <div className="container">
-        <button className="btn">
+        <button className="btn" onClick={cambiaTema}>
           Cambia
         </button>
 
@@ -25,5 +40,3 @@ function App() {
 }
 
 export default App;
-
-{/* A JSX comment */}
